@@ -7,6 +7,7 @@ Commands related to the Discord bot MuseCat and how to use them.
 Content
 ---
 - [Other](#other)
+  - [Motd](#motd) (Message of The Day)
   - [Feedback](#feedback)
   - [Eightball](#eightball)
   - [Ping](#ping)
@@ -435,6 +436,21 @@ Content
 
 ### Other
 ---
+### Motd
+
+**Description**: Shows the bot's message of the days and general announcements
+<br>
+<br>
+**Context**:
+/motd
+<br>
+**Example**: /motd
+
+**Permissions required**: `None`
+<br>
+<br>
+<br>
+
 
 ### Feedback
 
