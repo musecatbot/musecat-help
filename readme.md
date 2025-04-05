@@ -6,45 +6,48 @@ Commands related to the Discord bot MuseCat and how to use them.
 
 Content
 ---
-- [Other](#other)
-  - [Motd](#motd) (Message of The Day)
-  - [Feedback](#feedback)
-  - [Eightball](#eightball)
-  - [Ping](#ping)
-  - [Who Is](#whois)
-  - [Spotify](#spotify)
-  - [Server Info](#serverinfo)
-  - [About](#clear)
-  - [NSFW Commands](#nsfwcommands)
-    - [NSFW sexuality](#nsfwsexuality)
-    - [Art Search](#artsearch)
 - [Moderation](#moderation)
   - [Clear](#clear)
   - [Mute](#mute)
   - [Kick](#kick)
   - [Ban](#ban)
   - [Announce](#announce)
-  - [Lockdown Channel](#lockdownchannel)
-  - [Hide Channel](#hidechannel)
+  - [Channel](#channel)
+    - [Channel Lockdown](#channel-lockdown)
+    - [Channel Hide](#channel-hide)
   - [NSFW Ban](#nsfwban)
   - [New Emoji Role](#newemojirole)
-  - [Warning](#warningsection)
-    - [Warn](#warn)
-    - [Warnings](#warnings)
-    - [Warning ID](#warningid)
-    - [Pardon](#pardon)
+  - [Warning](#warnings)
+    - [warnings add](#warnings-add)
+    - [warnings lookup user](#warnings-lookup-user)
+    - [warnings lookup id](#warnings-lookup-id)
+    - [warnings remove specific](#warnings-remove-specific)
     - [Full Pardon](#fullpardon)
-  - [Add Bad Word](#addbadword)
-  - [Remove Bad Word](#removebadword)
-  - [All Filtered Words](#allfilteredwords)
-  - [Config](#config)
-    - [Log Update](#logupdate)
-    - [Join Channel](#joinchannel)
-    - [Announce Update](#announceupdate)
-    - [NSFW Update](#nsfwupdate)
-    - [Add Auto Role](#addautorole)
-    - [Remove Auto Role](#removeautorole)
-    - [All Auto Roles](#allautoroles)
+  - [Filter](#filter)
+    - [filter word add](#filter-word-add)
+    - [filter word remove](#filter-word-remove)
+    - [filter word list](#filter-word-list)
+  - [Settings](#settings)
+    - [settings logchannel](#settings-logchannel)
+    - [settings joinchannel](#settings-joinchannel)
+    - [settings announceupdate](#settings-announceupdate)
+    - [settings allow_nsfw](#settings-allow_nsfw)
+  - [Autorole](#autorole)
+    - [Autorole add](#autorole-add)
+    - [Autorole remove](#autorole-remove)
+    - [Autorole list](#autorole-list)
+- [Other](#other)
+  - [Motd](#motd)
+  - [Feedback](#feedback)
+  - [Eightball](#eightball)
+  - [Ping](#ping)
+  - [Who Is](#whois)
+  - [Spotify](#spotify)
+  - [Server Info](#serverinfo)
+  - [About](#about)
+  - [NSFW Commands](#nsfwcommands)
+    - [NSFW Sexuality](#nsfwsexuality)
+    - [Art Search](#artsearch)
 <br>
 <br>
 <br>
@@ -132,15 +135,19 @@ Content
 <br>
 <br>
 
-### LockdownChannel
+## CHANNEL
+Parent for all channel related commands
+<br>
+<br>
 
+### **Channel Lockdown**
 **Description**: Makes a channel read-only for anyone with the @everyone role
 <br>
 <br>
 **Context**:
-/lockdownchannel [`channel`]
+/channel lockdown [`channel`]
 <br>
-**Example**: /lockdownchannel `#general`
+**Example**: /channel lockdown `#general`
 > **Note**: To undo a lockdown, just run the command again
 
 **Permissions required**: `Manage Channels`
@@ -148,15 +155,15 @@ Content
 <br>
 <br>
 
-### HideChannel
+### Channel Hide
 
 **Description**: Hides a channel from anyone with the @everyone role
 <br>
 <br>
 **Context**:
-/hidechannel [`channel`]
+/channel hide [`channel`]
 <br>
-**Example**: /hidechannel `#general`
+**Example**: /channel hide `#general`
 > **Note**: To show a channel again, just re-run the command
 
 **Permissions required**: `Manage Channels`
@@ -181,6 +188,8 @@ Content
 
 
 **Permissions required**: `Manage Messages`
+
+**Note**: This command will not show unless inside of a NSFW channel. This is to prevent users from using the command outside of NSFW channels.
 <br>
 <br>
 <br>
@@ -200,49 +209,49 @@ Content
 <br>
 <br>
 
-### WarningSection
+### Warnings
 ---
 
-### Warn
+### warnings add
 
-**Description**: Warns a given member without notifying them
+**Description**: Warns a given member
 <br>
 <br>
 **Context**:
-/warn [`user`]
+/warnings add [`member`] [optional: `dm_member: yes/no`]
 <br>
-**Example**: /warn `Wumpus`
-> **Note**: After running a command, Discord will give a paragraph popup where you can type the reason of the warning. On mobile devices this may require an update for your mobile app.
+**Example**: /warnings add `Wumpus` `yes`
+> **Note**: After running a command, Discord will give a paragraph popup where you can type the reason of the warning.
 
 **Permissions required**: `moderate members`
 <br>
 <br>
 <br>
 
-### Warnings
+### warnings lookup user
 
 **Description**: Sends a list of all warnings a user has to the moderator log channel
 <br>
 <br>
 **Context**:
-/warnings [`user`]
+/warnings lookup user [`user`]
 <br>
-**Example**: /warnings `Wumpus`
+**Example**: /warnings lookup user `Wumpus`
 
 **Permissions required**: `moderate members`
 <br>
 <br>
 <br>
 
-### WarningID
+### warnings lookup id
 
 **Description**: Finds information on a specific warning on a user by ID
 <br>
 <br>
 **Context**:
-/warningid [`id`]
+/warnings lookup id [`id`]
 <br>
-**Example**: /warningid `1234567`
+**Example**: /warnings lookup id `1234567`
 
 
 **Permissions required**: `manage messages`
@@ -250,13 +259,13 @@ Content
 <br>
 <br>
 
-### Pardon
+### warnings remove specific
 
 **Description**: Removes a specific warning from a given user
 <br>
 <br>
 **Context**:
-/pardon [`id`]
+/warnings remove specific [`id`]
 
 **Permissions required**: `manage messages`
 <br>
@@ -278,28 +287,30 @@ Content
 <br>
 <br>
 
-### AddBadWord
+## Filter
+
+### filter word add
 
 **Description**: Adds a word to the message word filter
 <br>
 <br>
 **Context**:
-/addbadword [`word`], Rating: list-required [`Minor`, `Moderate`, `Severe`]
+/filter word add [`word`], Rating: list-required [`Minor`, `Moderate`, `Severe`]
 <br>
-**Example**: /addbadword `dynobot`, `Minor`
+**Example**: /filter word add `dynobot`, `Minor`
 
 **Permissions required**: `manage messages`
 <br>
 <br>
 <br>
 
-### RemoveBadWord
+### filter word remove
 
 **Description**: Removes a word from the message filter
 <br>
 <br>
 **Context**:
-/removebadword [`word`]
+/filter word remove [`word`]
 
 
 **Permissions required**: `manage messages`
@@ -307,76 +318,76 @@ Content
 <br>
 <br>
 
-### AllFilteredWords
+### filter word list
 
 **Description**: Generated a entire list of filtered words
 <br>
 <br>
 **Context**:
-/allfilteredwords
+/filter word list
 <br>
-**Example**: /allfilteredwords
+**Example**: /filter word list
 
 **Permissions required**: `manage messages`
 <br>
 <br>
 <br>
 
-### Config
+## settings
 ---
 
-### LogUpdate
+### settings logchannel
 
 **Description**: Updates the channel moderation logs are sent to, message edits, and so on
 <br>
 <br>
 **Context**:
-/logupdate [`channel`]
+/settings logchannel [`channel`]
 <br>
-**Example**: /logupdate `#General`
+**Example**: /settings logchannel `#General`
 
 **Permissions required**: `manage server`
 <br>
 <br>
 <br>
 
-### JoinChannel
+### settings joinchannel
 
 **Description**: Updates the channel new joins/leaves are posted
 <br>
 <br>
 **Context**:
-/joinchannel [`channel`]
+/settings joinchannel [`channel`]
 <br>
-**Example**: /joinchannel `#general`
+**Example**: /settings joinchannel `#general`
 
 **Permissions required**: `manage server`
 <br>
 <br>
 <br>
 
-### AnnounceUpdate
+### settings AnnounceUpdate
 
 **Description**: Updates fallback channel for announcments
 <br>
 <br>
 **Context**:
-/announceupdate [`channel`]
+/settings announceupdate [`channel`]
 <br>
-**Example**: /announceupdate `#general`
+**Example**: /settings announceupdate `#general`
 
 **Permissions required**: `manage guild`
 <br>
 <br>
 <br>
 
-### NsfwUpdate
+### settings allow_nsfw
 
 **Description**: Enabled and disabled all NSFW commands on the server
 <br>
 <br>
 **Context**:
-/nsfwupdate [choice: list-required [`enabled`, `disabled`]]
+/settings allow_nsfw [choice: list-required [`enabled`, `disabled`]]
 <br>
 
 **Permissions required**: `manage server`
@@ -387,15 +398,17 @@ Content
 <br>
 <br>
 
-### AddAutoRole
+## Autorole
 
-**Description**: Gives a role to members when they join
+### Autorole add
+
+**Description**: Adds a role to the list of roles given to users on join
 <br>
 <br>
 **Context**:
-/addautorole [`role`]
+/autorole add [`role`]
 <br>
-**Example**: /addautorole `@users`
+**Example**: /autorole add `@users`
 
 
 **Permissions required**: `manage roles`
@@ -403,22 +416,22 @@ Content
 <br>
 <br>
 
-### RemoveAutoRole
+### autorole remove
 
-**Description**: Removes an role from Autorole
+**Description**: Removes an role from Autorole list
 <br>
 <br>
 **Context**:
-/removeautorole [`role`]
+/autorole remove [`role`]
 <br>
-**Example**: /removeautorole `@users`
+**Example**: /autorole remove `@users`
 
 **Permissions required**: `manage roles`
 <br>
 <br>
 <br>
 
-### AllAutoRoles
+### autorole list
 
 **Description**: Generates a list of all roles given to users on join
 <br>
@@ -571,6 +584,7 @@ Content
 /nsfwsexuality [preference: list-required: [`Any`, `Hetrosexual`, `Homosexual`, `Lesbian`]]
 <br>
 **Example**: /nsfwsexuality `Any`
+**note**: This command will not show unless inside of a NSFW channel. This is to prevent users from using the command outside of NSFW channels.
 
 **Permissions required**: `None`
 <br>
@@ -586,6 +600,7 @@ Content
 /artsearch website: list-required[`e621`, `e926`], optinal: [`search term`]
 <br>
 **Example**: /artsearch `e621`, `fox -chicken`
+**note**: This command will not show unless inside of a NSFW channel. This is to prevent users from using the command outside of NSFW channels.
 
 **Permissions required**: `None`
 
